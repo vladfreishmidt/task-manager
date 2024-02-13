@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"net/http"
 	"strconv"
 )
@@ -34,16 +33,4 @@ func projectCreate(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.Write([]byte("Create a new project..."))
-}
-
-func main() {
-	mux := http.NewServeMux()
-	mux.HandleFunc("/", home)
-	mux.HandleFunc("/project/view", projectView)
-	mux.HandleFunc("/project/create", projectCreate)
-
-	log.Print("Starting server on :4000")
-	err := http.ListenAndServe(":4000", mux)
-
-	log.Fatal(err)
 }
