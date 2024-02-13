@@ -7,7 +7,8 @@ import (
 
 func main() {
 	mux := http.NewServeMux()
-	mux.HandleFunc("/", home)
+	mux.HandleFunc("/", dashboard)
+	mux.HandleFunc("/projects", projectListView)
 	mux.HandleFunc("/project/view", projectView)
 	mux.HandleFunc("/project/create", projectCreate)
 
