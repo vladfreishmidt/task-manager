@@ -19,6 +19,12 @@ func projectView(w http.ResponseWriter, r *http.Request) {
 }
 
 func projectCreate(w http.ResponseWriter, r *http.Request) {
+	if r.Method != "POST" {
+		w.Header().Set("Allow", http.MethodPost)
+		http.Error(w, "Method Not Allowed", http.StatusMethodNotAllowed)
+		return
+	}
+
 	w.Write([]byte("Create a new project..."))
 }
 
@@ -32,5 +38,4 @@ func main() {
 	err := http.ListenAndServe(":4000", mux)
 
 	log.Fatal(err)
-
 }
