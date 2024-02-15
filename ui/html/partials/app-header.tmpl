@@ -1,16 +1,29 @@
 {{define "app-header"}}
-<header class="header">
-    <div class="header__inner">
-      <div>
-        <nav>
-          <ul>
-            <li><a href="/">Dashboard</a></li>
-            <li><a href="/projects">Projects</a></li>
-          </ul>
-        </nav>
-      </div>
-      <div></div>
-      <div></div>
+<header class="app-header">
+  <div class="app-header__inner">
+    <div class="app-header__left-col">
+      <a href="/" class="app-header__logo">
+        <img src="/static/img/logo.png" alt="task manager logo" class="logo-image">
+        <span class="logo-name">Task Manager</span>
+      </a>
+      <nav class="nav app-header__nav">
+        <ul class="nav__list">
+          <li class="nav__item">
+            <a href="/" class="nav__link">Dashboard</a>
+          </li>
+          <li class="nav__item">
+            <a href="/projects" class="nav__link">Projects</a>
+          </li>
+        </ul>
+        {{block "app-action" .}}
+        {{end}}
+      </nav>
     </div>
-  </header>
+
+
+    <div class="user-menu">
+      <span>VF</span>
+    </div>
+  </div>
+</header>
 {{end}}

@@ -1,14 +1,20 @@
 {{define "title"}}Projects{{end}}
 
 {{define "main"}}
-<div>
+<section class="app-section">
     <div>
-        <h2>All projects</h2>
+        <h2 class="main-heading">Projects</h2>
         <ol>
-            <li>Web Chat</li>
-            <li>CLI app: parse audio</li>
-            <li>Platform health check</li>
+            <li>
+                <a href="/project/view?id=123">Web Chat</a>
+            </li>
+            <li>
+                <a href="/project/view?id=123">CLI app: parse audio</a>
+            </li>
+            <li>
+                <a href="/project/view?id=123">Platform health check</a>
+            </li>
         </ol>
     </div>
-</div>
+</section>
 {{end}}
