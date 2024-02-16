@@ -7,6 +7,12 @@ import (
 	"os"
 )
 
+// application struct to hold the application-wide dependencies
+type application struct {
+	errorLog *log.Logger
+	infoLog  *log.Logger
+}
+
 func main() {
 	// command-line flags
 	addr := flag.String("addr", ":4000", "HTTP network address")
@@ -16,6 +22,12 @@ func main() {
 	infoLog := log.New(os.Stdout, "INFO\t", log.Ldate|log.Ltime)
 	errorLog := log.New(os.Stderr, "ERROR\t", log.Ldate|log.Ltime|log.Lshortfile)
 
+	// application struct instance containing dependencies
+	app := &application{
+		errorLog: errorLog,
+		infoLog:  infoLog,
+	}
+
 	// router
 	mux := http.NewServeMux()
 
@@ -24,10 +36,10 @@ func main() {
 	mux.Handle("/static/", http.StripPrefix("/static", fileServer))
 
 	// routes
-	mux.HandleFunc("/", dashboard)
-	mux.HandleFunc("/projects", projectListView)
-	mux.HandleFunc("/project/view", projectView)
-	mux.HandleFunc("/project/create", projectCreate)
+	mux.HandleFunc("/", app.dashboard)
+	mux.HandleFunc("/projects", app.projectListView)
+	mux.HandleFunc("/project/view", app.projectView)
+	mux.HandleFunc("/project/create", app.projectCreate)
 
 	// new http.Server struct with configuration settings for the server
 	srv := &http.Server{
