@@ -28,24 +28,11 @@ func main() {
 		infoLog:  infoLog,
 	}
 
-	// router
-	mux := http.NewServeMux()
-
-	// file server
-	fileServer := http.FileServer(http.Dir("./ui/static"))
-	mux.Handle("/static/", http.StripPrefix("/static", fileServer))
-
-	// routes
-	mux.HandleFunc("/", app.dashboard)
-	mux.HandleFunc("/projects", app.projectListView)
-	mux.HandleFunc("/project/view", app.projectView)
-	mux.HandleFunc("/project/create", app.projectCreate)
-
 	// new http.Server struct with configuration settings for the server
 	srv := &http.Server{
 		Addr:     *addr,
 		ErrorLog: errorLog,
-		Handler:  mux,
+		Handler:  app.routes(),
 	}
 
 	infoLog.Printf("Starting server on %s", *addr)
