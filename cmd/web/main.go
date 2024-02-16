@@ -29,7 +29,14 @@ func main() {
 	mux.HandleFunc("/project/view", projectView)
 	mux.HandleFunc("/project/create", projectCreate)
 
+	// new http.Server struct with configuration settings for the server
+	srv := &http.Server{
+		Addr:     *addr,
+		ErrorLog: errorLog,
+		Handler:  mux,
+	}
+
 	infoLog.Printf("Starting server on %s", *addr)
-	err := http.ListenAndServe(*addr, mux)
+	err := srv.ListenAndServe()
 	errorLog.Fatal(err)
 }
