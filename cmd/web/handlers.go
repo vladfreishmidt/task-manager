@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"html/template"
 	"net/http"
 	"strconv"
@@ -81,11 +82,20 @@ func (app *application) projectView(w http.ResponseWriter, r *http.Request) {
 }
 
 func (app *application) projectCreate(w http.ResponseWriter, r *http.Request) {
-	if r.Method != "POST" {
+	if r.Method != http.MethodPost {
 		w.Header().Set("Allow", http.MethodPost)
 		app.clientError(w, http.StatusMethodNotAllowed)
 		return
 	}
 
-	w.Write([]byte("Create a new project..."))
+	title := "Cabin Booking app"
+	description := "A web app for booking an A-frame cabins"
+
+	id, err := app.projects.Insert(title, description)
+	if err != nil {
+		app.serverError(w, err)
+		return
+	}
+
+	http.Redirect(w, r, fmt.Sprintf("/project/view?id=%d", id), http.StatusSeeOther)
 }

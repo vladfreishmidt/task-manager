@@ -8,12 +8,14 @@ import (
 	"os"
 
 	_ "github.com/go-sql-driver/mysql"
+	"github.com/vladfreishmidt/task-manager/internal/models"
 )
 
 // application struct to hold the application-wide dependencies
 type application struct {
 	errorLog *log.Logger
 	infoLog  *log.Logger
+	projects *models.ProjectModel
 }
 
 func main() {
@@ -37,6 +39,7 @@ func main() {
 	app := &application{
 		errorLog: errorLog,
 		infoLog:  infoLog,
+		projects: &models.ProjectModel{DB: db},
 	}
 
 	// new http.Server struct with configuration settings for the server
