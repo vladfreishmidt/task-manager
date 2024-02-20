@@ -17,6 +17,7 @@
     --size-xxs: 0.5rem;
     --size-xs: 0.75rem;
     --size-sm: 1rem;
+    --size-pre-md: 1.4rem;
     --size-md: 1.5rem;
     --size-lg: 2rem;
     --size-xl: 3rem;
@@ -32,6 +33,8 @@
     --color-gray-500: #6b7280;
     --color-gray-600: #4b5563;
     --color-gray-700: #374151;
+
+    --color-black: #333;
 
     /* primary */
     --color-blue-50: #eff6ff;
@@ -53,6 +56,7 @@
     --app-sidebar-width: 26rem;
 
     --border-default: solid 1px var(--color-gray-200);
+    --border-md: solid 2px var(--color-gray-200);
     --border-accent: solid 3px var(--color-gray-200);
 
     --radius-default: 3px;
@@ -74,12 +78,22 @@ html {
 }
 
 body {
+    color: var(--color-black);
     font-family: "Inter", sans-serif;
     font-optical-sizing: auto;
     font-weight: 400;
     font-style: normal;
     font-variation-settings:
         "slnt" 0;
+}
+
+a {
+    color: var(--color-blue-600);
+    text-decoration: none;
+
+    &:hover {
+        text-decoration: underline;
+    }
 }
 
 img {
@@ -104,7 +118,7 @@ dl {
     color: #fff;
     background-color: var(--color-blue-600);
     font-weight: 500;
-    font-size: 1.4rem;
+    font-size: var(--size-pre-md);
     border: none;
     padding: var(--size-xs) var(--size-sm);
     border-radius: var(--radius-default);
@@ -150,7 +164,7 @@ dl {
     height: var(--app-header-height);
     border-bottom: var(--border-default);
     padding: 0 var(--size-lg);
-    font-size: 1.4rem;
+    font-size: var(--size-pre-md);
 
     .app-header__inner {
         height: 100%;
@@ -198,7 +212,7 @@ dl {
         }
 
         .nav__link {
-            font-size: 1.4rem;
+            font-size: var(--size-pre-md);
             font-weight: 500;
             color: var(--color-gray-700);
             padding: 0.5rem;
@@ -226,6 +240,19 @@ dl {
 
 
 /* === APP MAIN  / SECTION === */
+.app-heading {
+    color: var(--color-black);
+    font-size: var(--size-lg);
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: var(--size-lg);
+
+    a.app-heading__link {
+        font-weight: 400;
+        font-size: var(--size-md);
+    }
+}
 
 .app-main {
     display: flex;
@@ -263,7 +290,7 @@ dl {
     }
 
     a {
-        font-size: 1.4rem;
+        font-size: var(--size-pre-md);
         color: var(--color-gray-500);
         padding: var(--size-xxs) 0;
         text-decoration: none;
@@ -277,4 +304,64 @@ dl {
     width: var(--app-sidebar-width);
     height: var(--app-sidebar-height);
     border-right: var(--border-accent);
+}
+
+/* === APP TABLE === */
+.app-table {
+    border-collapse: collapse;
+    width: 100%;
+
+    td,
+    th {
+        text-align: left;
+        padding: var(--size-md);
+    }
+
+    thead {
+
+        border-bottom: var(--border-md);
+
+        th {
+            font-size: var(--size-pre-md);
+            font-weight: 600;
+        }
+
+
+    }
+
+    tbody {
+        border-bottom: var(--border-md);
+
+        tr {
+            transition: background-color 0.3s ease-in-out;
+
+            a {
+                display: block;
+                color: var(--color-blue-600);
+                text-decoration: none;
+            }
+
+            &:hover {
+                background-color: var(--color-gray-100);
+
+                a {
+                    text-decoration: underline;
+                }
+            }
+        }
+
+
+        td:first-child {
+            cursor: pointer;
+        }
+    }
+
+
+
+
+    /* tr:nth-child(even) {
+        background-color: var(--color-gray-100);
+    } */
+
+
 }

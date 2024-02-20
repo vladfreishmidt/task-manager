@@ -3,11 +3,31 @@
 {{define "main"}}
 <div class="app-dashboard">
   <section class="app-section">
-    <h2>
-      <span>Latest projects</span>
-      <a href="/projects">view all</a>
+    <h2 class="app-heading">
+      <span class="app-heading__link">Latest projects</span>
+      <a href="/projects" class="app-heading__link">view all</a>
     </h2>
-    <p>There is nothing to see here yet!</p>
+    {{if .Projects}}
+    <table class="app-table">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Created</th>
+          <th>ID</th>
+        </tr>
+      </thead>
+      <tbody> {{range .Projects}}
+        <tr>
+          <td><a href="/project/view?id={{.ID}}">{{.Title}}</a></td>
+          <td>{{.Created}}</td>
+          <td>{{.ID}}</td>
+        </tr>
+        {{end}}
+      </tbody>
+    </table>
+    {{else}}
+    <p>There's nothing to see here... yet!</p>
+    {{end}}
   </section>
   <section class="app-section">
     <h2>Recent tasks</h2>

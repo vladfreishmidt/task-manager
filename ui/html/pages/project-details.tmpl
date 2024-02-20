@@ -1,6 +1,7 @@
-{{define "title"}}Project name ⚠️{{end}}
+{{define "title"}}{{.Project.Title}}{{end}}
 
 {{define "main"}}
+{{with .Project}}
 <section class="app-section">
     <div>
         <ol class="app-breadcrumbs">
@@ -11,18 +12,22 @@
                 <a href="/projects" class="disabled">Overview</a>
             </li>
         </ol>
-        <h2 class="main-heading">Project name ⚠️</h2>
+        <h2 class="main-heading">{{.Title}}</h2>
+        <p>created: {{.Created.Weekday}} {{.Created.Day}} {{.Created.Month}}
+            {{.Created.Year}}</p>
+        <p>{{.Description}}</p>
         <ol>
             <li>
-                <a href="/project/view?id=123">Task 1 ⚠️</a>
+                <a href="/task/view?id=1">Task 1 ⚠️</a>
             </li>
             <li>
-                <a href="/project/view?id=123">Task 2 ⚠️</a>
+                <a href="/task/view?id=2">Task 2 ⚠️</a>
             </li>
             <li>
-                <a href="/project/view?id=123">Task 3 ⚠️</a>
+                <a href="/task/view?id=3">Task 3 ⚠️</a>
             </li>
         </ol>
     </div>
 </section>
+{{end}}
 {{end}}
