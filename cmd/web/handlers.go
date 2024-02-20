@@ -61,8 +61,11 @@ func (app *application) projectView(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	partials := &Partials{Sidebar: true}
+
 	app.render(w, http.StatusOK, "project-details.tmpl", &templateData{
-		Project: project,
+		Project:  project,
+		Partials: partials,
 	})
 }
 
