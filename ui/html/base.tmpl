@@ -17,10 +17,10 @@
   <div>
     {{template "app-header" .}}
     <div class="app-main">
-
+      {{if .Partials.Sidebar}}
       {{block "app-sidebar" .}}
       {{end}}
-
+      {{end}}
       <main class="main">
         {{template "main" .}}
       </main>

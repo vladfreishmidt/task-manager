@@ -3,7 +3,6 @@ package main
 import (
 	"errors"
 	"fmt"
-	"html/template"
 	"net/http"
 	"strconv"
 
@@ -22,27 +21,12 @@ func (app *application) dashboard(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	files := []string{
-		"./ui/html/base.tmpl",
-		"./ui/html/partials/app-header.tmpl",
-		"./ui/html/pages/dashboard.tmpl",
-	}
+	partials := &Partials{Sidebar: false}
 
-	ts, err := template.ParseFiles(files...)
-	if err != nil {
-		app.serverError(w, err)
-		return
-	}
-
-	data := &templateData{
+	app.render(w, http.StatusOK, "dashboard.tmpl", &templateData{
 		Projects: projects,
-	}
-
-	err = ts.ExecuteTemplate(w, "base", data)
-	if err != nil {
-		app.serverError(w, err)
-		return
-	}
+		Partials: partials,
+	})
 }
 
 func (app *application) projectListView(w http.ResponseWriter, r *http.Request) {
@@ -52,28 +36,12 @@ func (app *application) projectListView(w http.ResponseWriter, r *http.Request) 
 		return
 	}
 
-	files := []string{
-		"./ui/html/base.tmpl",
-		"./ui/html/partials/app-header.tmpl",
-		"./ui/html/partials/app-action.tmpl",
-		"./ui/html/pages/project-list.tmpl",
-	}
+	partials := &Partials{Sidebar: true, Action: true}
 
-	ts, err := template.ParseFiles(files...)
-	if err != nil {
-		app.serverError(w, err)
-		return
-	}
-
-	data := &templateData{
+	app.render(w, http.StatusOK, "project-list.tmpl", &templateData{
 		Projects: projects,
-	}
-
-	err = ts.ExecuteTemplate(w, "base", data)
-	if err != nil {
-		app.serverError(w, err)
-		return
-	}
+		Partials: partials,
+	})
 }
 
 func (app *application) projectView(w http.ResponseWriter, r *http.Request) {
@@ -93,29 +61,9 @@ func (app *application) projectView(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	files := []string{
-		"./ui/html/base.tmpl",
-		"./ui/html/partials/app-header.tmpl",
-		"./ui/html/partials/app-action.tmpl",
-		"./ui/html/partials/app-sidebar.tmpl",
-		"./ui/html/pages/project-details.tmpl",
-	}
-
-	ts, err := template.ParseFiles(files...)
-	if err != nil {
-		app.serverError(w, err)
-		return
-	}
-
-	data := &templateData{
+	app.render(w, http.StatusOK, "project-details.tmpl", &templateData{
 		Project: project,
-	}
-
-	err = ts.ExecuteTemplate(w, "base", data)
-	if err != nil {
-		app.serverError(w, err)
-		return
-	}
+	})
 }
 
 func (app *application) projectCreate(w http.ResponseWriter, r *http.Request) {

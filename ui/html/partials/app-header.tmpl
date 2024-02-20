@@ -15,7 +15,9 @@
             <a href="/projects" class="nav__link">Projects</a>
           </li>
         </ul>
+        {{if .Partials.Action}}
         {{block "app-action" .}}
+        {{end}}
         {{end}}
       </nav>
     </div>
