@@ -23,10 +23,11 @@ func (app *application) dashboard(w http.ResponseWriter, r *http.Request) {
 
 	partials := &Partials{Sidebar: false}
 
-	app.render(w, http.StatusOK, "dashboard.tmpl", &templateData{
-		Projects: projects,
-		Partials: partials,
-	})
+	data := app.newTemplateData(r)
+	data.Projects = projects
+	data.Partials = partials
+
+	app.render(w, http.StatusOK, "dashboard.tmpl", data)
 }
 
 func (app *application) projectListView(w http.ResponseWriter, r *http.Request) {
