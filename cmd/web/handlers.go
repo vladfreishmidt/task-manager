@@ -15,7 +15,13 @@ func (app *application) dashboard(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	projects, err := app.projects.Latest()
+	id, err := strconv.Atoi(r.URL.Query().Get("id"))
+	if err != nil || id < 1 {
+		app.notFound(w)
+		return
+	}
+
+	projects, err := app.projects.Latest(id)
 	if err != nil {
 		app.serverError(w, err)
 		return
@@ -30,8 +36,39 @@ func (app *application) dashboard(w http.ResponseWriter, r *http.Request) {
 	app.render(w, http.StatusOK, "dashboard.tmpl", data)
 }
 
+// ***
+// WORKSPACES
+// ***
+
+func (app *application) workspaceListView(w http.ResponseWriter, r *http.Request) {
+
+	workspaces, err := app.workspaces.All(1)
+	if err != nil {
+		app.serverError(w, err)
+		return
+	}
+
+	partials := &Partials{Sidebar: false}
+
+	data := app.newTemplateData(r)
+	data.Partials = partials
+	data.Workspaces = workspaces
+
+	app.render(w, http.StatusOK, "workspace-list.tmpl", data)
+}
+
+// ***
+// PROJECTS
+// ***
+
 func (app *application) projectListView(w http.ResponseWriter, r *http.Request) {
-	projects, err := app.projects.Latest()
+	id, err := strconv.Atoi(r.URL.Query().Get("id"))
+	if err != nil || id < 1 {
+		app.notFound(w)
+		return
+	}
+
+	projects, err := app.projects.Latest(id)
 	if err != nil {
 		app.serverError(w, err)
 		return

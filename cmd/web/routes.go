@@ -11,6 +11,11 @@ func (app *application) routes() *http.ServeMux {
 	mux.Handle("/static/", http.StripPrefix("/static", fileServer))
 
 	// routes
+
+	// workspaces
+	mux.HandleFunc("/workspaces", app.workspaceListView)
+
+	// projects
 	mux.HandleFunc("/", app.dashboard)
 	mux.HandleFunc("/projects", app.projectListView)
 	mux.HandleFunc("/project/view", app.projectView)

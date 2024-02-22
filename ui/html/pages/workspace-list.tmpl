@@ -1,13 +1,13 @@
-{{define "title"}}Projects{{end}}
+{{define "title"}}Workspaces{{end}}
 
 {{define "main"}}
 <div class="app-dashboard">
     <section class="app-section">
         <h2 class="app-heading">
-            <span class="app-heading__link">Projects</span>
-            <a href="/project/create" class="app-heading__link app-action">Create project</a>
+            <span class="app-heading__link">Workspaces</span>
+            <a href="/project/create" class="app-heading__link app-action">Create workspace</a>
         </h2>
-        {{if .Projects}}
+        {{if .Workspaces}}
         <table class="app-table">
             <thead>
                 <tr>
@@ -16,11 +16,11 @@
                     <th>ID</th>
                 </tr>
             </thead>
-            <tbody> {{range .Projects}}
+            <tbody> {{range .Workspaces}}
                 <tr>
-                    <td><a href="/project/view?id={{.ID}}">{{.Name}}</a></td>
-                    <td>{{humanDate .Created}}</td>
-                    <td>{{.ID}}</td>
+                    <td><a href="/workspaces/{{.WorkspaceID}}">{{.Name}}</a></td>
+                    <td>{{humanDate .CreatedAt}}</td>
+                    <td>{{.WorkspaceID}}</td>
                 </tr>
                 {{end}}
             </tbody>

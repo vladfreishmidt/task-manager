@@ -8,7 +8,7 @@ import (
 
 type Project struct {
 	ID          int
-	Title       string
+	Name        string
 	Description string
 	Created     time.Time
 }
@@ -34,12 +34,12 @@ func (m *ProjectModel) Insert(title string, description string) (int, error) {
 }
 
 func (m *ProjectModel) Get(id int) (*Project, error) {
-	stmt := "SELECT id, title, description, created FROM projects WHERE id = ?"
+	stmt := "SELECT project_id, name, description, created_at FROM projects WHERE id = ?"
 	row := m.DB.QueryRow(stmt, id)
 
 	p := &Project{}
 
-	err := row.Scan(&p.ID, &p.Title, &p.Description, &p.Created)
+	err := row.Scan(&p.ID, &p.Name, &p.Description, &p.Created)
 	if err != nil {
 		if errors.Is(err, sql.ErrNoRows) {
 			return nil, ErrNoRecord
@@ -52,7 +52,7 @@ func (m *ProjectModel) Get(id int) (*Project, error) {
 }
 
 func (m *ProjectModel) All() ([]*Project, error) {
-	stmt := `SELECT id, title, description, created FROM projects
+	stmt := `SELECT project_id, name, description, created_at FROM projects
 	ORDER BY id DESC LIMIT 100
 	`
 
@@ -68,7 +68,7 @@ func (m *ProjectModel) All() ([]*Project, error) {
 	for rows.Next() {
 		p := &Project{}
 
-		err = rows.Scan(&p.ID, &p.Title, &p.Description, &p.Created)
+		err = rows.Scan(&p.ID, &p.Name, &p.Description, &p.Created)
 		if err != nil {
 			return nil, err
 		}
@@ -83,12 +83,10 @@ func (m *ProjectModel) All() ([]*Project, error) {
 	return projects, nil
 }
 
-func (m *ProjectModel) Latest() ([]*Project, error) {
-	stmt := `SELECT id, title, description, created FROM projects
-	ORDER BY id DESC LIMIT 10
-	`
+func (m *ProjectModel) Latest(workspaceID int) ([]*Project, error) {
+	stmt := `SELECT project_id, name, description, created_at FROM projects WHERE workspace_id = ?;`
 
-	rows, err := m.DB.Query(stmt)
+	rows, err := m.DB.Query(stmt, workspaceID)
 	if err != nil {
 		return nil, err
 	}
@@ -100,7 +98,7 @@ func (m *ProjectModel) Latest() ([]*Project, error) {
 	for rows.Next() {
 		p := &Project{}
 
-		err = rows.Scan(&p.ID, &p.Title, &p.Description, &p.Created)
+		err = rows.Scan(&p.ID, &p.Name, &p.Description, &p.Created)
 		if err != nil {
 			return nil, err
 		}

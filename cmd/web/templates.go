@@ -16,6 +16,7 @@ type Partials struct {
 type templateData struct {
 	CurrentYear int
 	Partials    *Partials
+	Workspaces  []*models.Workspace
 	Project     *models.Project
 	Projects    []*models.Project
 }
