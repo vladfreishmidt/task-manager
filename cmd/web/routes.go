@@ -14,8 +14,6 @@ func (app *application) routes() http.Handler {
 	fileServer := http.FileServer(http.Dir("./ui/static/"))
 	router.Handler(http.MethodGet, "/static/*filepath", http.StripPrefix("/static", fileServer))
 
-	// routes
-
 	// workspaces
 	router.HandlerFunc(http.MethodGet, "/workspaces", app.workspaceListView)
 	router.HandlerFunc(http.MethodGet, "/workspaces/:id", app.workspaceView)
@@ -28,5 +26,5 @@ func (app *application) routes() http.Handler {
 	// mux.HandleFunc("/project/view", app.projectView)
 	// mux.HandleFunc("/project/create", app.projectCreate)
 
-	return router
+	return secureHeaders(router)
 }
