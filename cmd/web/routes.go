@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"github.com/julienschmidt/httprouter"
+	"github.com/justinas/alice"
 )
 
 func (app *application) routes() http.Handler {
@@ -26,5 +27,7 @@ func (app *application) routes() http.Handler {
 	// mux.HandleFunc("/project/view", app.projectView)
 	// mux.HandleFunc("/project/create", app.projectCreate)
 
-	return app.recoverPanic(app.logRequest(secureHeaders(router)))
+	standard := alice.New(app.recoverPanic, app.logRequest, secureHeaders)
+
+	return standard.Then(router)
 }
