@@ -26,5 +26,5 @@ func (app *application) routes() http.Handler {
 	// mux.HandleFunc("/project/view", app.projectView)
 	// mux.HandleFunc("/project/create", app.projectCreate)
 
-	return app.logRequest(secureHeaders(router))
+	return app.recoverPanic(app.logRequest(secureHeaders(router)))
 }
