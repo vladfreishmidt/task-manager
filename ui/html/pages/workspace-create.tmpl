@@ -1,0 +1,34 @@
+{{define "title"}}Create a New Workspace{{end}}
+
+{{define "app-main"}}
+<section class="app-workspace-create">
+    <div class="app-workspace-create__main app-box">
+        <form action="/workspace/create" method="POST" class="app-form">
+            <h3 class="app-form__name">Create a New Workspace</h3>
+            <div class="app-form__input-group">
+                <label for="workspace-name" class="app-form__label">Name</label>
+                <input type="text" id="workspace-name" name="workspace-name" class="app-form__input"
+                    placeholder="Type Workspace Name...">
+            </div>
+            <div class="app-form__input-group">
+                <label for="workspace-description" class="app-form__label">Description</label>
+                <textarea id="workspace-description" name="workspace-description" class="app-form__textarea"
+                    placeholder="Type Workspace Description..."></textarea>
+            </div>
+            <div class="app-form__input-group">
+                <span class="app-form__label">Owner</span>
+                <div class="create-form-workspace-user">
+                    <div class="info">
+                        <div class="avatar app-user-avatar"></div>
+                        <div class="name">Vlad Freishmidt</div>
+                    </div>
+                    <div class="email">vladfreishmidt@gmail.com</div>
+                </div>
+            </div>
+            <div class="app-form__submit-group">
+                <button class="app-button">Create Workspace</button>
+            </div>
+        </form>
+    </div>
+</section>
+{{end}}
