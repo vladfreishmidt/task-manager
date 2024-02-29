@@ -51,12 +51,11 @@ func (m *ProjectModel) Get(id int) (*Project, error) {
 	return p, nil
 }
 
-func (m *ProjectModel) All() ([]*Project, error) {
+func (m *ProjectModel) All(workspaceID int) ([]*Project, error) {
 	stmt := `SELECT project_id, name, description, created_at FROM projects
-	ORDER BY id DESC LIMIT 100
-	`
+	WHERE workspace_id = ?;`
 
-	rows, err := m.DB.Query(stmt)
+	rows, err := m.DB.Query(stmt, workspaceID)
 	if err != nil {
 		return nil, err
 	}

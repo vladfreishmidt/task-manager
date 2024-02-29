@@ -1,31 +1,5 @@
 {{define "app-header"}}
-<header class="app-header">
-  <div class="app-header__inner">
-    <div class="app-header__left-col">
-      <a href="/" class="app-header__logo">
-        <img src="/static/img/logo.png" alt="task manager logo" class="logo-image">
-        <span class="logo-name">Task Manager</span>
-      </a>
-      <nav class="nav app-header__nav">
-        <ul class="nav__list">
-          <li class="nav__item">
-            <a href="/" class="nav__link">Dashboard</a>
-          </li>
-          <li class="nav__item">
-            <a href="/projects" class="nav__link">Projects</a>
-          </li>
-        </ul>
-        {{if .Partials.Action}}
-        {{block "app-action" .}}
-        {{end}}
-        {{end}}
-      </nav>
-    </div>
-
-
-    <div class="user-menu">
-      <span>VF</span>
-    </div>
-  </div>
+<header class="app-header app-box">
+    <nav>header</nav>
 </header>
 {{end}}

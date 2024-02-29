@@ -1,5 +1,31 @@
 {{define "app-sidebar"}}
-<aside class="app-sidebar">
-    <nav></nav>
+<aside class="app-sidebar app-box">
+    <div class="app-sidebar__top">
+        <div>Logo</div>
+        <nav class="app-nav">sidebar</nav>
+    </div>
+    <div class="app-sidebar__bottom">
+        <section class="app-settings">
+            <h3>Account</h3>
+            <nav class="app-nav">
+                <ul class="app-nav__list">
+                    <li class="app-nav__list-item">
+                        <a href="/settings" class="app-nav__link">
+                            <span>icon</span>
+                            <span>Settings</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </section>
+        <section class="app-user">
+            <div class="app-user__avatar"></div>
+            <div class="app-user__info">
+                <div class="app-user__name">Vladyslav Freishmidt</div>
+                <div class="app-user__email">vladfreishmidt@gmail.com</div>
+            </div>
+        </section>
+    </div>
+
 </aside>
 {{end}}

@@ -20,17 +20,13 @@ func (app *application) routes() http.Handler {
 	fileServer := http.FileServer(http.Dir("./ui/static/"))
 	router.Handler(http.MethodGet, "/static/*filepath", http.StripPrefix("/static", fileServer))
 
+	router.HandlerFunc(http.MethodGet, "/", app.dashboardView)
+
 	// workspaces
 	router.HandlerFunc(http.MethodGet, "/workspaces", app.workspaceListView)
-	router.HandlerFunc(http.MethodGet, "/workspaces/:id", app.workspaceView)
-	// router.HandlerFunc(http.MethodGet, "/workspaces/create", app.workspaceCreate)
-	router.HandlerFunc(http.MethodPost, "/workspaces/create", app.workspaceCreatePost)
-
-	// projects
-	// mux.HandleFunc("/", app.dashboard)
-	// mux.HandleFunc("/projects", app.projectListView)
-	// mux.HandleFunc("/project/view", app.projectView)
-	// mux.HandleFunc("/project/create", app.projectCreate)
+	router.HandlerFunc(http.MethodGet, "/workspace/view/:id", app.workspaceView)
+	router.HandlerFunc(http.MethodGet, "/workspace/create", app.workspaceCreate)
+	router.HandlerFunc(http.MethodPost, "/workspace/create", app.workspaceCreatePost)
 
 	standard := alice.New(app.recoverPanic, app.logRequest, secureHeaders)
 

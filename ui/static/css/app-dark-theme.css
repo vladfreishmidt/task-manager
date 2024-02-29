@@ -1,0 +1,14 @@
+:root {
+    --color-body-dark-theme: #141518;
+    --color-section--dark-theme: #1F1F27;
+    --color-text-accent--dark-theme: #FCFDFF;
+}
+
+body {
+    background-color: var(--color-body-dark-theme);
+    color: var(--color-text-accent--dark-theme);
+}
+
+.app-box {
+    background-color: var(--color-section--dark-theme);
+}

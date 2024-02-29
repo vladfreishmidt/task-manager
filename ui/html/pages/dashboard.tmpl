@@ -1,37 +1,11 @@
 {{define "title"}}Dashboard{{end}}
 
-{{define "main"}}
-<div class="app-dashboard">
-  <section class="app-section">
-    <h2 class="app-heading">
-      <span class="app-heading__link">Latest projects</span>
-      <a href="/projects" class="app-heading__link">view all</a>
-    </h2>
-    {{if .Projects}}
-    <table class="app-table">
-      <thead>
-        <tr>
-          <th>Title</th>
-          <th>Created</th>
-          <th>ID</th>
-        </tr>
-      </thead>
-      <tbody> {{range .Projects}}
-        <tr>
-          <td><a href="/project/view?id={{.ID}}">{{.Title}}</a></td>
-          <td>{{humanDate .Created}}</td>
-          <td>{{.ID}}</td>
-        </tr>
-        {{end}}
-      </tbody>
-    </table>
-    {{else}}
-    <p>There's nothing to see here... yet!</p>
-    {{end}}
-  </section>
-  <section class="app-section">
-    <h2>Recent tasks</h2>
-    <p>No tasks added to see here yet!</p>
-  </section>
-</div>
+{{define "app-main"}}
+<section class="app-dashboard">
+    <div class="app-dashboard__main app-box">hello</div>
+    <div class="app-dashboard__aside">
+        <div class="app-box">box 1</div>
+        <div class="app-box">box 2</div>
+    </div>
+</section>
 {{end}}

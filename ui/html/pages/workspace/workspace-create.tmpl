@@ -7,13 +7,16 @@
             <h3 class="app-form__name">Create a New Workspace</h3>
             <div class="app-form__input-group">
                 <label for="workspace-name" class="app-form__label">Name</label>
+                {{with .Form.FieldErrors.name}}
+                <span class="app-form__error">{{.}}</span>
+                {{end}}
                 <input type="text" id="workspace-name" name="workspace-name" class="app-form__input"
-                    placeholder="Type Workspace Name...">
+                    placeholder="Type Workspace Name..." value="{{.Form.Name}}">
             </div>
             <div class="app-form__input-group">
                 <label for="workspace-description" class="app-form__label">Description</label>
                 <textarea id="workspace-description" name="workspace-description" class="app-form__textarea"
-                    placeholder="Type Workspace Description..."></textarea>
+                    placeholder="Type Workspace Description...">{{.Form.Description}}</textarea>
             </div>
             <div class="app-form__input-group">
                 <span class="app-form__label">Owner</span>

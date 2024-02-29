@@ -1,0 +1,36 @@
+{{define "title"}}Workspaces{{end}}
+
+{{define "app-main"}}
+<div class="app-dashboard">
+    <section class="app-box">
+        <h2 class="app-heading">
+            <span class="app-heading__link">Workspaces</span>
+            <a href="/project/create" class="app-heading__link app-action">Create workspace</a>
+        </h2>
+        {{if .Workspaces}}
+        <div class="app-workspaces__inner">
+            {{range .Workspaces}}
+
+            <div class="workspace-card">
+                <div class="workspace-card__body">
+                    <span class="workspace__id">ID: #{{.WorkspaceID}}</span>
+                    <a href="/workspaces/{{.WorkspaceID}}" class="workspace__link">
+                        <span class="workspace__name">
+                            {{.Name}}
+                        </span>
+                        <span class="workspace__description">{{.Description}}</span>
+                    </a>
+
+                </div>
+                <div class="workspace-card__footer">
+                    <div class="workspace__date">created on: {{humanDate .CreatedAt}}</div>
+                </div>
+            </div>
+            {{end}}
+        </div>
+        {{else}}
+        <p>There's nothing to see here... yet!</p>
+        {{end}}
+    </section>
+</div>
+{{end}}

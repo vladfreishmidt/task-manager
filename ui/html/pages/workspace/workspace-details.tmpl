@@ -1,0 +1,48 @@
+{{define "title"}}{{.Workspace.Name}}{{end}}
+
+{{define "app-main"}}
+<section class="app-box">
+    {{with .Workspace}}
+    <div class="app-box-header">
+        <ol class="app-breadcrumbs">
+            <li>
+                <a href="/workspaces">Workspaces</a>
+            </li>
+            <li>
+                <a href="/workspaces/{{.WorkspaceID}}" class="disabled">{{.Name}}</a>
+            </li>
+        </ol>
+        <h2 class="app-heading">
+            <span class="app-heading__link">{{.Name}}</span>
+            <a href="/project/create" class="app-heading__link app-action">Create project</a>
+        </h2>
+        <p class="app-heading-description">{{.Description}}</p>
+    </div>
+    {{end}}
+
+
+    {{if .Projects}}
+    <table class="app-table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Created</th>
+                <th>ID</th>
+            </tr>
+        </thead>
+        <tbody> {{range .Projects}}
+            <tr>
+                <td><a href="/project/view?id={{.ID}}">{{.Name}}</a></td>
+                <td>{{humanDate .Created}}</td>
+                <td>{{.ID}}</td>
+            </tr>
+            {{end}}
+        </tbody>
+    </table>
+    {{else}}
+    <p>There's nothing to see here... yet!</p>
+    {{end}}
+
+</section>
+
+{{end}}
