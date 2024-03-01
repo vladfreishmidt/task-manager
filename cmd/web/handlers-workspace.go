@@ -5,17 +5,16 @@ import (
 	"fmt"
 	"net/http"
 	"strconv"
-	"strings"
-	"unicode/utf8"
 
 	"github.com/julienschmidt/httprouter"
 	"github.com/vladfreishmidt/task-manager/internal/models"
+	"github.com/vladfreishmidt/task-manager/internal/validator"
 )
 
 type workspaceCreateForm struct {
 	Name        string
 	Description string
-	FieldErrors map[string]string
+	validator.Validator
 }
 
 func (app *application) workspaceCreatePost(w http.ResponseWriter, r *http.Request) {
@@ -28,22 +27,15 @@ func (app *application) workspaceCreatePost(w http.ResponseWriter, r *http.Reque
 	form := workspaceCreateForm{
 		Name:        r.PostForm.Get("workspace-name"),
 		Description: r.PostForm.Get("workspace-description"),
-		FieldErrors: map[string]string{},
 	}
 
 	ownerID := 1 // hardcoded userID
 
-	if strings.TrimSpace(form.Name) == "" {
-		form.FieldErrors["name"] = "This field cannot be blank"
-	} else if utf8.RuneCountInString(form.Name) > 100 {
-		form.FieldErrors["name"] = "This field cannot be more than 100 characters long"
-	}
+	form.CheckField(validator.NotBlank(form.Name), "name", "This field cannot be blank")
+	form.CheckField(validator.MaxChars(form.Name, 100), "name", "This field cannot be more than 100 characters long")
+	form.CheckField(validator.MaxChars(form.Description, 255), "description", "This field cannot be more than 255 characters long")
 
-	if utf8.RuneCountInString(form.Description) > 250 {
-		form.FieldErrors["description"] = "This field cannot be more than 250 characters long"
-	}
-
-	if len(form.FieldErrors) > 0 {
+	if !form.Valid() {
 		partials := &Partials{Sidebar: true}
 		data := app.newTemplateData(r)
 		data.Form = form
