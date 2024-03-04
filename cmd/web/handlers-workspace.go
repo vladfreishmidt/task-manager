@@ -12,21 +12,18 @@ import (
 )
 
 type workspaceCreateForm struct {
-	Name        string
-	Description string
-	validator.Validator
+	Name                string `form:"workspace-name"`
+	Description         string `form:"workspace-description"`
+	validator.Validator `form:"-"`
 }
 
 func (app *application) workspaceCreatePost(w http.ResponseWriter, r *http.Request) {
-	err := r.ParseForm()
+	var form workspaceCreateForm
+
+	err := app.decodePostForm(r, &form)
 	if err != nil {
 		app.clientError(w, http.StatusBadRequest)
 		return
-	}
-
-	form := workspaceCreateForm{
-		Name:        r.PostForm.Get("workspace-name"),
-		Description: r.PostForm.Get("workspace-description"),
 	}
 
 	ownerID := 1 // hardcoded userID

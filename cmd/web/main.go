@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"os"
 
+	"github.com/go-playground/form/v4"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/vladfreishmidt/task-manager/internal/models"
 )
@@ -19,6 +20,7 @@ type application struct {
 	projects      *models.ProjectModel
 	workspaces    *models.WorkspaceModel
 	templateCache map[string]*template.Template
+	formDecoder   *form.Decoder
 }
 
 func main() {
@@ -44,6 +46,9 @@ func main() {
 		errorLog.Fatal(err)
 	}
 
+	// initialize a form decoder
+	formDecoder := form.NewDecoder()
+
 	// application struct instance containing dependencies
 	app := &application{
 		errorLog:      errorLog,
@@ -51,6 +56,7 @@ func main() {
 		projects:      &models.ProjectModel{DB: db},
 		workspaces:    &models.WorkspaceModel{DB: db},
 		templateCache: templateCache,
+		formDecoder:   formDecoder,
 	}
 
 	// new http.Server struct with configuration settings for the server
