@@ -47,6 +47,8 @@ func (app *application) workspaceCreatePost(w http.ResponseWriter, r *http.Reque
 		return
 	}
 
+	app.sessionManager.Put(r.Context(), "flash", "Workspace successfully created.")
+
 	http.Redirect(w, r, fmt.Sprintf("/workspace/view/%d", id), http.StatusSeeOther)
 }
 

@@ -20,6 +20,7 @@
     --color-text-accent--dark-theme: #FCFDFF;
     --color-attendant: #236BFA;
     --color-white: #FCFDFF;
+    --color-red: #e35959;
 
 
     /* COMPONENT SIZING */
@@ -43,6 +44,11 @@ html {
 body {
     font-family: var(--app-font-family);
     font-size: var(--font-size-body);
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-variation-settings:
+        "slnt" 0;
 }
 
 li {
@@ -113,13 +119,13 @@ li {
         }
 
         .app-form__error {
-            color: red;
+            color: var(--color-red);
             font-size: var(--font-size-body);
             margin-bottom: var(--margin-sm);
         }
 
         .app-form__error+.app-form__input {
-            border: 2px solid red;
+            border: 2px solid var(--color-red);
         }
     }
 
@@ -143,6 +149,11 @@ li {
     border-radius: var(--app-radius);
 }
 
+.app-sidebar.app-box {
+    padding-left: 0;
+    padding-right: 0;
+}
+
 .app-sidebar {
     min-width: 270px;
     width: 270px;
@@ -150,6 +161,25 @@ li {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+
+    .app-nav__link {
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: var(--padding-md);
+        padding: var(--padding-md) 0 var(--padding-md) var(--app-gap);
+
+
+        .text {
+            color: #64646F;
+        }
+
+        .icon {
+            width: 20px;
+            height: 20px;
+            background-color: #236BFA;
+        }
+    }
 
 }
 

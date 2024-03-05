@@ -35,6 +35,9 @@
     <div class="app-content">
       {{template "app-header" .}}
       <main class="app-main ">
+        {{with .Flash}}
+        <div class="flash">{{.}}</div>
+        {{end}}
         {{template "app-main" .}}
       </main>
     </div>

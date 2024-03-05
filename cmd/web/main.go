@@ -7,7 +7,10 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"time"
 
+	"github.com/alexedwards/scs/mysqlstore"
+	"github.com/alexedwards/scs/v2"
 	"github.com/go-playground/form/v4"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/vladfreishmidt/task-manager/internal/models"
@@ -15,12 +18,13 @@ import (
 
 // application struct to hold the application-wide dependencies
 type application struct {
-	errorLog      *log.Logger
-	infoLog       *log.Logger
-	projects      *models.ProjectModel
-	workspaces    *models.WorkspaceModel
-	templateCache map[string]*template.Template
-	formDecoder   *form.Decoder
+	errorLog       *log.Logger
+	infoLog        *log.Logger
+	projects       *models.ProjectModel
+	workspaces     *models.WorkspaceModel
+	templateCache  map[string]*template.Template
+	formDecoder    *form.Decoder
+	sessionManager *scs.SessionManager
 }
 
 func main() {
@@ -49,14 +53,20 @@ func main() {
 	// initialize a form decoder
 	formDecoder := form.NewDecoder()
 
+	// initialize a session manager
+	sessionsManager := scs.New()
+	sessionsManager.Store = mysqlstore.New(db)
+	sessionsManager.Lifetime = 12 * time.Hour
+
 	// application struct instance containing dependencies
 	app := &application{
-		errorLog:      errorLog,
-		infoLog:       infoLog,
-		projects:      &models.ProjectModel{DB: db},
-		workspaces:    &models.WorkspaceModel{DB: db},
-		templateCache: templateCache,
-		formDecoder:   formDecoder,
+		errorLog:       errorLog,
+		infoLog:        infoLog,
+		projects:       &models.ProjectModel{DB: db},
+		workspaces:     &models.WorkspaceModel{DB: db},
+		templateCache:  templateCache,
+		formDecoder:    formDecoder,
+		sessionManager: sessionsManager,
 	}
 
 	// new http.Server struct with configuration settings for the server

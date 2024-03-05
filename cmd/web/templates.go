@@ -21,6 +21,7 @@ type templateData struct {
 	Project     *models.Project
 	Projects    []*models.Project
 	Form        any
+	Flash       string
 }
 
 func humanDate(t time.Time) string {
@@ -34,7 +35,7 @@ var functions = template.FuncMap{
 func newTemplateCache() (map[string]*template.Template, error) {
 	cache := map[string]*template.Template{}
 
-	pages, err := filepath.Glob("./ui/html/pages/*.tmpl")
+	pages, err := filepath.Glob("./ui/html/pages/*/*.tmpl")
 	if err != nil {
 		return nil, err
 	}
