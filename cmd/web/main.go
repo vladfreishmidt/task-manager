@@ -1,6 +1,7 @@
 package main
 
 import (
+	"crypto/tls"
 	"database/sql"
 	"flag"
 	"html/template"
@@ -57,6 +58,7 @@ func main() {
 	sessionsManager := scs.New()
 	sessionsManager.Store = mysqlstore.New(db)
 	sessionsManager.Lifetime = 12 * time.Hour
+	sessionsManager.Cookie.Secure = true
 
 	// application struct instance containing dependencies
 	app := &application{
@@ -69,15 +71,21 @@ func main() {
 		sessionManager: sessionsManager,
 	}
 
+	// initialize tls.Config struct to hold non-default TLS settings
+	tlsConfig := &tls.Config{
+		CurvePreferences: []tls.CurveID{tls.X25519, tls.CurveP256},
+	}
+
 	// new http.Server struct with configuration settings for the server
 	srv := &http.Server{
-		Addr:     *addr,
-		ErrorLog: errorLog,
-		Handler:  app.routes(),
+		Addr:      *addr,
+		ErrorLog:  errorLog,
+		Handler:   app.routes(),
+		TLSConfig: tlsConfig,
 	}
 
 	infoLog.Printf("Starting server on %s", *addr)
-	err = srv.ListenAndServe()
+	err = srv.ListenAndServeTLS("./tls/cert.pem", "./tls/key.pem")
 	errorLog.Fatal(err)
 }
 
