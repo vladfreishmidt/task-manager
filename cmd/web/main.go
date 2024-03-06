@@ -23,6 +23,7 @@ type application struct {
 	infoLog        *log.Logger
 	projects       *models.ProjectModel
 	workspaces     *models.WorkspaceModel
+	users          *models.UserModel
 	templateCache  map[string]*template.Template
 	formDecoder    *form.Decoder
 	sessionManager *scs.SessionManager
@@ -66,6 +67,7 @@ func main() {
 		infoLog:        infoLog,
 		projects:       &models.ProjectModel{DB: db},
 		workspaces:     &models.WorkspaceModel{DB: db},
+		users:          &models.UserModel{DB: db},
 		templateCache:  templateCache,
 		formDecoder:    formDecoder,
 		sessionManager: sessionsManager,
