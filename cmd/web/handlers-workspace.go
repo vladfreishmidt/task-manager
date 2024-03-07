@@ -26,7 +26,7 @@ func (app *application) workspaceCreatePost(w http.ResponseWriter, r *http.Reque
 		return
 	}
 
-	ownerID := 1 // hardcoded userID
+	ownerID := r.Context().Value(userID).(int)
 
 	form.CheckField(validator.NotBlank(form.Name), "name", "This field cannot be blank")
 	form.CheckField(validator.MaxChars(form.Name, 100), "name", "This field cannot be more than 100 characters long")
@@ -98,10 +98,9 @@ func (app *application) workspaceView(w http.ResponseWriter, r *http.Request) {
 }
 
 func (app *application) workspaceListView(w http.ResponseWriter, r *http.Request) {
+	userID := r.Context().Value(userID).(int)
 
-	hardcodedUserID := 1 // hardcoded user id for dev purpose
-
-	workspaces, err := app.workspaces.All(hardcodedUserID)
+	workspaces, err := app.workspaces.All(userID)
 	if err != nil {
 		app.serverError(w, err)
 		return
