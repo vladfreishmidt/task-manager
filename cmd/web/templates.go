@@ -14,14 +14,15 @@ type Partials struct {
 }
 
 type templateData struct {
-	CurrentYear int
-	Partials    *Partials
-	Workspace   *models.Workspace
-	Workspaces  []*models.Workspace
-	Project     *models.Project
-	Projects    []*models.Project
-	Form        any
-	Flash       string
+	CurrentYear     int
+	Partials        *Partials
+	Workspace       *models.Workspace
+	Workspaces      []*models.Workspace
+	Project         *models.Project
+	Projects        []*models.Project
+	Form            any
+	Flash           string
+	IsAuthenticated bool
 }
 
 func humanDate(t time.Time) string {
