@@ -1,5 +1,15 @@
 {{define "app-header"}}
 <header class="app-header app-box">
     <nav>header</nav>
+    {{if .IsAuthenticated}}
+    <form action='/user/logout' method='POST'>
+        <input type="hidden" name="csrf_token" value="{{.CSRFToken}}">
+        <button>Logout</button>
+    </form>
+    {{else}}
+    <a href='/user/signup'>Signup</a>
+    <a href='/user/login'>Login</a>
+    {{end}}
+
 </header>
 {{end}}

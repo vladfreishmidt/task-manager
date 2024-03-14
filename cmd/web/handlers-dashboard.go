@@ -11,5 +11,5 @@ func (app *application) dashboardView(w http.ResponseWriter, r *http.Request) {
 	data := app.newTemplateData(r)
 	data.Partials = partials
 
-	app.render(w, http.StatusOK, "dashboard.tmpl", data)
+	app.render(w, http.StatusOK, "landing.tmpl", data)
 }

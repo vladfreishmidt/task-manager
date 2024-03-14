@@ -30,14 +30,18 @@
 </body> -->
 
 <body>
+  {{with .Flash}}
+  <div class="flash">{{.}}</div>
+  {{end}}
   <div class="app-wrapper">
+    {{if .Partials.Sidebar}}
     {{template "app-sidebar"}}
+    {{end}}
     <div class="app-content">
+      {{if .Partials.Header}}
       {{template "app-header" .}}
+      {{end}}
       <main class="app-main ">
-        {{with .Flash}}
-        <div class="flash">{{.}}</div>
-        {{end}}
         {{template "app-main" .}}
       </main>
     </div>

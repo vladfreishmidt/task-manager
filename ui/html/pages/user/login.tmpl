@@ -1,27 +1,60 @@
 {{define "title"}}Login{{end}}
 {{define "app-main"}}
-<form action='/user/login' method='POST' novalidate>
-    <!-- Notice that here we are looping over the NonFieldErrors and displaying
-them, if any exist -->
-    {{range .Form.NonFieldErrors}}
-    <div class='error'>{{.}}</div>
-    {{end}}
-    <div>
-        <label>Email:</label>
-        {{with .Form.FieldErrors.email}}
-        <label class='error'>{{.}}</label>
-        {{end}}
-        <input type='email' name='email' value='{{.Form.Email}}'>
+<section class="app-user-login">
+    <div class="app-user-login__left-col app-box">
+        <div class="app-user-login__logo">
+            <img src="/static/img/logo-v2.png" alt="logo">
+            <span>_task _manager</span>
+        </div>
+        <form action='/user/login' method='POST' class="app-form" novalidate>
+            <h3 class="app-form__name">Welcome back</h3>
+            <p class="app-form__description">Login to your account</p>
+            {{range .Form.NonFieldErrors}}
+            <div class='app-form-non-field-error'>{{.}}</div>
+            {{end}}
+            <input type="hidden" name="csrf_token" value="{{.CSRFToken}}">
+            <div class="app-form__input-group">
+                <label for="email" class="app-form__label">Email:</label>
+                {{with .Form.FieldErrors.email}}
+                <span class='app-form__error'>{{.}}</span>
+                {{end}}
+                <input type="email" name="email" id="email" value='{{.Form.Email}}' class="app-form__input"
+                    placeholder="me@example.com">
+            </div>
+            <div class="app-form__input-group">
+                <label for="password" class="app-form__label">Password:</label>
+                {{with .Form.FieldErrors.password}}
+                <span class='app-form__error'>{{.}}</span>
+                {{end}}
+                <input type="password" name="password" id="password" class="app-form__input"
+                    placeholder="••••••••••••••••">
+            </div>
+            <div class="app-form__submit-group">
+                <button type="submit" class="app-button app-button--lg">Login</button>
+                <div class="app-form-reference">
+                    <span>Don't have an account?</span>
+                    <a href="/user/signup">Sign up</a>
+                </div>
+            </div>
+        </form>
     </div>
-    <div>
-        <label>Password:</label>
-        {{with .Form.FieldErrors.password}}
-        <label class='error'>{{.}}</label>
-        {{end}}
-        <input type='password' name='password'>
+
+    <div class="app-user-login__right-col">
+        <div class="quote">
+            <div class="quote__body">
+                "After experiencing the complexities of project management, I realized the need for a customized
+                solution
+                that could adapt to the unique challenges and requirements of different projects. This led me to create
+                a web application that not only streamlines processes but also provides users with customizable
+                functionalities. This empowers them to navigate complexities with ease and efficience."
+            </div>
+            <div class="quote-author">
+                <img src="/static/img/vf-avatar.png" class="quote-author__avatar" alt="Vladyslav Freishmidt">
+                <span class="quote-author__name">
+                    @vladfreishmidt
+                </span>
+            </div>
+        </div>
     </div>
-    <div>
-        <input type='submit' value='Login'>
-    </div>
-</form>
+</section>
 {{end}}

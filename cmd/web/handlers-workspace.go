@@ -55,7 +55,8 @@ func (app *application) workspaceCreatePost(w http.ResponseWriter, r *http.Reque
 func (app *application) workspaceCreate(w http.ResponseWriter, r *http.Request) {
 	data := app.newTemplateData(r)
 
-	partials := &Partials{Sidebar: false}
+	partials := &Partials{Sidebar: true, Header: true}
+
 	data.Partials = partials
 	data.Form = workspaceCreateForm{}
 
@@ -106,7 +107,7 @@ func (app *application) workspaceListView(w http.ResponseWriter, r *http.Request
 		return
 	}
 
-	partials := &Partials{Sidebar: false}
+	partials := &Partials{Sidebar: true, Header: true}
 
 	data := app.newTemplateData(r)
 	data.Partials = partials

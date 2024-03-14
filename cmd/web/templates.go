@@ -9,6 +9,7 @@ import (
 )
 
 type Partials struct {
+	Header  bool
 	Sidebar bool
 	Action  bool
 }

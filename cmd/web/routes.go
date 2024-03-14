@@ -22,7 +22,7 @@ func (app *application) routes() http.Handler {
 
 	dynamic := alice.New(app.sessionManager.LoadAndSave, noSurf, app.authenticate)
 
-	router.HandlerFunc(http.MethodGet, "/", app.dashboardView)
+	router.Handler(http.MethodGet, "/", dynamic.ThenFunc(app.dashboardView))
 
 	// user
 	router.Handler(http.MethodGet, "/user/signup", dynamic.ThenFunc(app.userSignup))

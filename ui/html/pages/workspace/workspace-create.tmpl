@@ -5,6 +5,7 @@
     <div class="app-workspace-create__main app-box">
         <form action="/workspace/create" method="POST" class="app-form">
             <h3 class="app-form__name">Create a New Workspace</h3>
+            <input type="hidden" name="csrf_token" value="{{.CSRFToken}}">
             <div class="app-form__input-group">
                 <label for="workspace-name" class="app-form__label">Name</label>
                 {{with .Form.FieldErrors.name}}

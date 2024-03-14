@@ -5,8 +5,11 @@
     --app-radius: 2rem;
     --margin-sm: 0.8rem;
     --margin-md: 1.6rem;
+    --margin-lg: 2.4rem;
+
     --padding-sm: 0.7rem;
     --padding-md: 1.4rem;
+    --padding-lg: 2.4rem;
 
     /* FONT SIZE */
     --font-size-sm: 1.2rem;
@@ -49,10 +52,50 @@ body {
     font-style: normal;
     font-variation-settings:
         "slnt" 0;
+    overflow: hidden;
 }
 
 li {
     list-style: none;
+}
+
+@keyframes slideInFromLeft {
+    0% {
+        transform: translate(200%);
+    }
+
+    20% {
+        transform: translate(0);
+        animation-delay: 3s;
+    }
+
+    70% {
+        transform: translate(0);
+        animation-delay: 3s;
+    }
+
+    90% {
+        transform: translate(0);
+        animation-delay: 3s;
+    }
+
+    100% {
+        transform: translate(200%);
+        animation-delay: 0s;
+    }
+
+}
+
+.flash {
+    position: absolute;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 10;
+    background-color: var(--color-border-accent--dark-theme);
+    color: var(--color-white);
+    padding: 2.4rem;
+    transform: translate(200%);
+    animation: 6s ease-out 0s 1 slideInFromLeft;
 }
 
 .app-button {
@@ -63,6 +106,10 @@ li {
     font-size: var(--font-size-body);
     padding: var(--padding-sm) var(--padding-md);
     cursor: pointer;
+}
+
+.app-button.app-button--lg {
+    padding: var(--padding-md) var(--padding-lg);
 }
 
 .app-user-avatar {
@@ -79,13 +126,28 @@ li {
         color: var(--color-text-secondary--dark-theme);
         font-size: var(--font-size-md);
         font-weight: 400;
-        margin-bottom: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    .app-form__description {
+        color: var(--color-text-secondary--dark-theme);
+        font-size: var(--font-size-sm);
+        font-weight: 400;
+        margin-bottom: var(--margin-lg);
+    }
+
+    .app-form-non-field-error {
+        color: var(--color-red);
+        padding: var(--padding-lg);
+        border: 2px solid var(--color-red);
+        border-radius: var(--radius-component-sm);
+        margin-bottom: var(--margin-lg);
     }
 
     .app-form__input-group {
         display: flex;
         flex-direction: column;
-        margin-bottom: var(--margin-md);
+        margin-bottom: var(--margin-lg);
 
         .app-form__label {
             color: var(--color-text-accent--dark-theme);
@@ -152,6 +214,96 @@ li {
 .app-sidebar.app-box {
     padding-left: 0;
     padding-right: 0;
+}
+
+.quote {
+    max-width: 720px;
+    padding: var(--padding-lg);
+
+    .quote__body {
+        font-size: 3rem;
+        color: var(--color-white);
+        margin-bottom: var(--margin-lg);
+    }
+
+    .quote-author {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+    }
+
+    .quote-author__avatar {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+    }
+
+    .quote-author__name {
+        font-size: 2rem;
+    }
+}
+
+.app-user-login {
+    display: flex;
+    width: 100%;
+    height: 100%;
+
+    .app-user-login__left-col {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40%;
+        background-color: var(--color-section--dark-theme);
+        position: relative;
+
+        .app-user-login__logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+
+            position: absolute;
+            top: 5rem;
+            left: 5rem;
+
+            span {
+                font-size: var(--font-size-md);
+            }
+        }
+
+        .app-form {
+            flex: 1;
+            max-width: 470px;
+        }
+
+        .app-form__submit-group {
+            display: block;
+        }
+
+        .app-button {
+            width: 100%;
+            display: block;
+            margin-bottom: var(--margin-lg);
+        }
+
+        .app-form-reference {
+            text-align: center;
+
+            span {
+                color: var(--color-text-secondary--dark-theme);
+            }
+
+            a {
+                color: var(--color-white);
+            }
+        }
+    }
+
+    .app-user-login__right-col {
+        width: 60%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 }
 
 .app-sidebar {
