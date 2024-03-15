@@ -79,3 +79,22 @@ func (m *UserModel) Exists(id int) (bool, error) {
 	err := m.DB.QueryRow(stmt, id).Scan(&exists)
 	return exists, err
 }
+
+func (m *UserModel) Get(id int) (*User, error) {
+	stmt := "SELECT name, email FROM users WHERE user_id = ?"
+
+	row := m.DB.QueryRow(stmt, id)
+
+	u := &User{}
+
+	err := row.Scan(&u.Name, &u.Email)
+	if err != nil {
+		if errors.Is(err, sql.ErrNoRows) {
+			return nil, ErrNoRecord
+		} else {
+			return nil, err
+		}
+	}
+
+	return u, nil
+}

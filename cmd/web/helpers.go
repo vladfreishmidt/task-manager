@@ -48,8 +48,24 @@ func (app *application) render(w http.ResponseWriter, status int, page string, d
 	buf.WriteTo(w)
 }
 
+func (app *application) getUserInfo(r *http.Request) *UserInfo {
+	userID := app.sessionManager.GetInt(r.Context(), "authenticatedUserID")
+	userInfo := &UserInfo{}
+
+	user, err := app.users.Get(userID)
+	if err != nil {
+		return userInfo
+	}
+
+	userInfo.Name = user.Name
+	userInfo.Email = user.Email
+
+	return userInfo
+}
+
 func (app *application) newTemplateData(r *http.Request) *templateData {
 	return &templateData{
+		UserInfo:        app.getUserInfo(r),
 		CurrentYear:     time.Now().Year(),
 		Flash:           app.sessionManager.PopString(r.Context(), "flash"),
 		IsAuthenticated: app.isAuthenticated(r),

@@ -14,8 +14,14 @@ type Partials struct {
 	Action  bool
 }
 
+type UserInfo struct {
+	Name  string
+	Email string
+}
+
 type templateData struct {
 	CurrentYear     int
+	UserInfo        *UserInfo
 	Partials        *Partials
 	Workspace       *models.Workspace
 	Workspaces      []*models.Workspace

@@ -6,25 +6,25 @@
             <img src="/static/img/logo-v2.png" alt="logo">
             <span>_task _manager</span>
         </div>
-        <form action='/user/login' method='POST' class="app-form" novalidate>
+        <form action="/user/login" method="POST" class="app-form" novalidate>
             <h3 class="app-form__name">Welcome back</h3>
             <p class="app-form__description">Login to your account</p>
             {{range .Form.NonFieldErrors}}
-            <div class='app-form-non-field-error'>{{.}}</div>
+            <div class="app-form-non-field-error">{{.}}</div>
             {{end}}
             <input type="hidden" name="csrf_token" value="{{.CSRFToken}}">
             <div class="app-form__input-group">
                 <label for="email" class="app-form__label">Email:</label>
                 {{with .Form.FieldErrors.email}}
-                <span class='app-form__error'>{{.}}</span>
+                <span class="app-form__error">{{.}}</span>
                 {{end}}
-                <input type="email" name="email" id="email" value='{{.Form.Email}}' class="app-form__input"
+                <input type="email" name="email" id="email" value="{{.Form.Email}}" class="app-form__input"
                     placeholder="me@example.com">
             </div>
             <div class="app-form__input-group">
                 <label for="password" class="app-form__label">Password:</label>
                 {{with .Form.FieldErrors.password}}
-                <span class='app-form__error'>{{.}}</span>
+                <span class="app-form__error">{{.}}</span>
                 {{end}}
                 <input type="password" name="password" id="password" class="app-form__input"
                     placeholder="••••••••••••••••">
@@ -32,7 +32,7 @@
             <div class="app-form__submit-group">
                 <button type="submit" class="app-button app-button--lg">Login</button>
                 <div class="app-form-reference">
-                    <span>Don't have an account?</span>
+                    <span>Don"t have an account?</span>
                     <a href="/user/signup">Sign up</a>
                 </div>
             </div>

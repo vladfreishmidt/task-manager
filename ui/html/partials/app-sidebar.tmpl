@@ -1,24 +1,29 @@
 {{define "app-sidebar"}}
 <aside class="app-sidebar app-box">
     <div class="app-sidebar__top">
-        <div>Logo</div>
+        <div class="app-sidebar__logo">
+            <img src="/static/img/logo-v2.png" width="19" height="27" alt="logo">
+            <span>_task _manager</span>
+        </div>
         <nav class="app-nav">
             <ul class="app-nav__list">
                 <li class="app-nav__list-item">
                     <a href="/" class="app-nav__link">
-                        <span class="icon"></span>
+                        <img src="/static/icons/icon_dashboard-na.svg" alt="icon dashboard">
                         <span class="text">Dashboard</span>
                     </a>
                 </li>
                 <li class="app-nav__list-item">
                     <a href="/workspaces" class="app-nav__link">
-                        <span class="icon"></span>
+                        <img src="/static/icons/icon_workspace-na.svg" alt="icon workspace">
+
                         <span class="text">Workspaces</span>
                     </a>
                 </li>
                 <li class="app-nav__list-item">
                     <a href="/projects" class="app-nav__link">
-                        <span class="icon"></span>
+
+                        <img src="/static/icons/icon_project-na.svg" alt="icon project">
                         <span class="text">Projects</span>
                     </a>
                 </li>
@@ -27,13 +32,13 @@
     </div>
     <div class="app-sidebar__bottom">
         <section class="app-settings">
-            <h3>Account</h3>
+            <h3 class="app-settings__heading">Account</h3>
             <nav class="app-nav">
                 <ul class="app-nav__list">
                     <li class="app-nav__list-item">
                         <a href="/settings" class="app-nav__link">
-                            <span>icon</span>
-                            <span>Settings</span>
+                            <img src="/static/icons/icon_settings-na.svg" alt="icon settings">
+                            <span class="text">Settings</span>
                         </a>
                     </li>
                 </ul>
@@ -42,12 +47,11 @@
         <section class="app-user">
             <div class="app-user__avatar"></div>
             <div class="app-user__info">
-                <div class="app-user__name">Vladyslav Freishmidt</div>
-                <div class="app-user__email">vladfreishmidt@gmail.com</div>
+                {{with .UserInfo}}
+                <div class="app-user__name">{{.Name}}</div>
+                <div class="app-user__email">{{.Email}}</div>
+                {{end}}
             </div>
-            <form action='/user/logout' method='POST'>
-                <button>Logout</button>
-            </form>
         </section>
     </div>
 

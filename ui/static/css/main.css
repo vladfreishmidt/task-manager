@@ -12,6 +12,7 @@
     --padding-lg: 2.4rem;
 
     /* FONT SIZE */
+    --font-size-xs: 1.0rem;
     --font-size-sm: 1.2rem;
     --font-size-body: 1.4rem;
     --font-size-md: 1.8rem;
@@ -19,11 +20,13 @@
     /* COLORS */
     --color-input-accent--dark-theme: #2A2C3A;
     --color-border-accent--dark-theme: #3E404D;
-    --color-text-secondary--dark-theme: #64646F;
+    --color-text-secondary--dark-theme: #AAAAB1;
     --color-text-accent--dark-theme: #FCFDFF;
     --color-attendant: #236BFA;
     --color-white: #FCFDFF;
     --color-red: #e35959;
+
+    --gradient-primary--dark-theme: linear-gradient(90deg, rgba(42, 44, 58, 1) 0%, rgba(40, 42, 57, 1) 100%);
 
 
     /* COMPONENT SIZING */
@@ -167,7 +170,6 @@ li {
             padding: var(--padding-md);
 
             &::placeholder {
-                color: var(--color-text-secondary--dark-theme);
                 font-size: var(--font-size-body);
                 font-weight: 500;
             }
@@ -243,12 +245,14 @@ li {
     }
 }
 
-.app-user-login {
+.app-user-login,
+.app-user-signup {
     display: flex;
     width: 100%;
     height: 100%;
 
-    .app-user-login__left-col {
+    .app-user-login__left-col,
+    .app-user-signup__left-col {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -298,7 +302,8 @@ li {
         }
     }
 
-    .app-user-login__right-col {
+    .app-user-login__right-col,
+    .app-user-signup__right-col {
         width: 60%;
         display: flex;
         align-items: center;
@@ -306,13 +311,41 @@ li {
     }
 }
 
+
+.app-sidebar.app-box {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
 .app-sidebar {
     min-width: 270px;
     width: 270px;
-    padding-top: 80px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+
+    .app-sidebar__logo {
+        padding: var(--app-gap);
+        height: var(--height-header);
+        border-bottom: 2px solid var(--color-border-accent--dark-theme);
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: var(--margin-lg);
+
+        span {
+            font-size: var(--font-size-md);
+        }
+    }
+
+    .app-nav__list-item {
+        margin-bottom: var(--margin-sm);
+    }
+
+    .app-nav__list-item:hover {
+        background: rgb(42, 44, 58);
+        background: var(--gradient-primary--dark-theme);
+    }
 
     .app-nav__link {
         text-decoration: none;
@@ -323,14 +356,48 @@ li {
 
 
         .text {
-            color: #64646F;
+            color: var(--color-text-secondary--dark-theme);
         }
+    }
 
-        .icon {
-            width: 20px;
-            height: 20px;
-            background-color: #236BFA;
-        }
+    .app-settings {
+        margin-bottom: 6.5rem;
+    }
+
+    .app-settings__heading {
+        color: var(--color-border-accent--dark-theme);
+        font-size: var(--font-size-sm);
+        font-weight: 400;
+        text-transform: uppercase;
+        margin-left: var(--app-gap);
+        margin-bottom: var(--margin-sm);
+    }
+
+    .app-user {
+        padding: var(--app-gap);
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        background: var(--gradient-primary--dark-theme);
+        border-bottom-left-radius: var(--app-radius);
+        border-bottom-right-radius: var(--app-radius);
+    }
+
+    .app-user__avatar {
+        background: #6987EF;
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        border: 1px solid var(--color-white)
+    }
+
+    .app-user__name {
+        font-size: var(--font-size-sm);
+    }
+
+    .app-user__email {
+        font-size: var(--font-size-xs);
+        color: var(--color-text-secondary--dark-theme);
     }
 
 }

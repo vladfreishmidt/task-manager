@@ -4,6 +4,8 @@
 
 <head>
   <meta charset="UTF-8">
+  <meta name="description"
+    content="Task Manager is a web application designed to help manage the software development process.">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel='shortcut icon' href='/static/img/favicon-32x32.png' type='image/x-icon'>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -35,7 +37,7 @@
   {{end}}
   <div class="app-wrapper">
     {{if .Partials.Sidebar}}
-    {{template "app-sidebar"}}
+    {{template "app-sidebar" .}}
     {{end}}
     <div class="app-content">
       {{if .Partials.Header}}
@@ -46,6 +48,7 @@
       </main>
     </div>
   </div>
+
 </body>
 
 </html>
