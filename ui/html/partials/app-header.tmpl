@@ -1,7 +1,6 @@
 {{define "app-header"}}
 <header class="app-header app-box">
-    <nav>header</nav>
-    {{if .IsAuthenticated}}
+    <!-- {{if .IsAuthenticated}}
     <form action='/user/logout' method='POST'>
         <input type="hidden" name="csrf_token" value="{{.CSRFToken}}">
         <button>Logout</button>
@@ -9,7 +8,26 @@
     {{else}}
     <a href='/user/signup'>Signup</a>
     <a href='/user/login'>Login</a>
-    {{end}}
+    {{end}} -->
+
+    <div class="app-header__left-col">
+        <div class="app-header__current-page">Workspace</div>
+        <div class="app-header__current-workspace">Commercial apps</div>
+        <div class="app-header__change-workspace">
+            <div>change workspace</div>
+        </div>
+    </div>
+    <div class="app-header__right-col">
+        <div class="app-header__search">
+            <form action="" method="POST" class="app-form">
+                <input type="text">
+            </form>
+        </div>
+        <div class="app-header__widgets">
+            <div>[]</div>
+            <div>C</div>
+        </div>
+    </div>
 
 </header>
 {{end}}
