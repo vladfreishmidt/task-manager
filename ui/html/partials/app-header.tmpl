@@ -12,22 +12,36 @@
 
     <div class="app-header__left-col">
         <div class="app-header__current-page">Workspace</div>
-        <div class="app-header__current-workspace">Commercial apps</div>
+        <div class="app-header__current-workspace">
+            <img src="/static/icons/icon_workspace-current.svg" alt="workspace icon">
+            <span>Commercial apps</span>
+        </div>
         <div class="app-header__change-workspace">
-            <div>change workspace</div>
+            <div class="app-workspace-action">
+                <span>change workspace</span>
+                <img src="/static/icons/icon-chevron-down.svg" alt="chevron down icon">
+            </div>
+            <ul class="app-workspace-list">
+                <li>My pet projects</li>
+                <li>Freelanc</li>
+                <li>Commercial applications Golang</li>
+            </ul>
         </div>
     </div>
     <div class="app-header__right-col">
-        <div class="app-header__search">
+        <!-- <div class="app-header__search">
             <form action="" method="POST" class="app-form">
                 <input type="text">
             </form>
-        </div>
+        </div> -->
         <div class="app-header__widgets">
-            <div>[]</div>
-            <div>C</div>
+            <div>
+                <img src="/static/icons/icon-inbox.svg" alt="inbox icon">
+            </div>
+            <div>
+                <img src="/static/icons/icon-dark-theme.svg" alt="dark theme icon">
+            </div>
         </div>
     </div>
-
 </header>
 {{end}}

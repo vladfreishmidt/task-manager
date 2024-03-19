@@ -16,6 +16,7 @@
     --font-size-sm: 1.2rem;
     --font-size-body: 1.4rem;
     --font-size-md: 1.8rem;
+    --font-size-xl: 2.4rem;
 
     /* COLORS */
     --color-input-accent--dark-theme: #2A2C3A;
@@ -410,8 +411,105 @@ li {
 }
 
 .app-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     height: var(--height-header);
     background-color: #64a3ef;
+
+    .app-header__left-col {
+        display: flex;
+    }
+
+    .app-header__current-page {
+        font-size: var(--font-size-xl);
+        font-weight: 500;
+        padding-right: var(--padding-md);
+        margin-right: var(--margin-lg);
+        border-right: 1px solid var(--color-border-accent--dark-theme);
+    }
+
+    .app-header__current-workspace {
+        display: flex;
+        align-items: center;
+        gap: var(--margin-sm);
+        margin-right: var(--margin-md);
+
+        span {
+            font-size: var(--font-size-sm);
+        }
+    }
+
+    .app-header__change-workspace {
+        display: flex;
+        align-items: center;
+        position: relative;
+
+        .app-workspace-action {
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+            text-transform: uppercase;
+
+            span {
+                color: var(--color-border-accent--dark-theme);
+                cursor: pointer;
+            }
+
+        }
+
+        .app-workspace-list {
+            width: 24rem;
+            display: none;
+            padding-top: var(--padding-md);
+            padding-bottom: var(--padding-md);
+            background-color: var(--color-input-accent--dark-theme);
+            border-radius: var(--radius-component-sm);
+            position: absolute;
+            left: 0;
+            top: 100%;
+
+            li {
+                color: var(--color-text-secondary--dark-theme);
+                line-height: 2rem;
+                padding: var(--padding-md);
+                cursor: pointer;
+
+                &:hover {
+                    background-color: var(--color-border-accent--dark-theme);
+                }
+            }
+        }
+
+
+        &:hover {
+            .app-workspace-list {
+                display: block;
+            }
+
+            .app-workspace-action {
+                span {
+                    color: var(--color-text-secondary--dark-theme);
+                }
+
+                img {
+                    display: none;
+                }
+            }
+        }
+    }
+
+    .app-header__widgets {
+        display: flex;
+        align-items: center;
+        gap: var(--margin-md);
+    }
+
+}
+
+
+
+
 }
 
 .app-main {
