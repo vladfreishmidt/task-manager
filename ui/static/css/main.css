@@ -470,6 +470,9 @@ li {
             top: 100%;
 
             li {
+                display: flex;
+                align-items: center;
+                gap: var(--margin-sm);
                 color: var(--color-text-secondary--dark-theme);
                 line-height: 2rem;
                 padding: var(--padding-md);
@@ -504,11 +507,6 @@ li {
         align-items: center;
         gap: var(--margin-md);
     }
-
-}
-
-
-
 
 }
 
@@ -568,5 +566,19 @@ li {
             width: 34px;
             height: 34px;
         }
+    }
+}
+
+.app-workspace-list {
+    .app-workspaces__inner {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--app-gap);
+    }
+
+    .workspace-card {
+        width: 32.8rem;
+        border: 1px solid green;
+        padding: var(--padding-lg);
     }
 }
